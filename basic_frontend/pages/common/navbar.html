@@ -1,0 +1,53 @@
+<!-- Sidebar -->
+<div class="sticky-top d-flex flex-column bg-light text-dark vh-100 p-3 shadow-sm border-end" style="width: 250px; border-radius: 0 1rem 1rem 0;">
+    <!-- Logo / Tiêu đề -->
+    <h4 class="text-center mb-4">Thư viện</h4>
+
+    <!-- Menu chung -->
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/pages/index.html" class="nav-link text-dark">Trang chủ</a>
+        </li>
+        <li class="nav-item">
+            <a href="/pages/index.html" class="nav-link text-dark">Xem sách</a>
+        </li>
+
+        <!-- Chỉ dành cho READER -->
+        <li class="nav-item reader-only position-relative">
+            <a href="/pages/reader/cart.html" class="nav-link text-dark">
+                Giỏ mượn
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                </span>
+            </a>
+        </li>
+        <li class="nav-item reader-only">
+            <a href="/pages/reader/borrow-history.html" class="nav-link text-dark">Lịch sử mượn</a>
+        </li>
+        <li class="nav-item reader-only">
+            <a href="/pages/reader/profile.html" class="nav-link text-dark">Tài khoản</a>
+        </li>
+
+        <!-- Chỉ dành cho ADMIN -->
+        <li class="nav-item admin-only">
+            <a href="/pages/admin/reader.html" class="nav-link text-dark">Quản lý người dùng</a>
+        </li>
+        <li class="nav-item admin-only">
+            <a href="/pages/admin/borrow-receipt.html" class="nav-link text-dark">Quản lý đơn mượn</a>
+        </li>
+    </ul>
+
+    <!-- Footer -->
+    <hr class="text-secondary">
+    <div class="text-center">
+        <div id="auth-links">
+            <a href="/pages/auth/login.html" class="btn btn-sm mb-2 w-100">Đăng nhập</a>
+            <a href="/pages/auth/register.html" class="btn btn-sm w-100">Đăng ký</a>
+        </div>
+        <div id="logout-link" class="d-none">
+            <button class="btn btn-danger btn-sm w-100" onclick="logout()">Đăng xuất</button>
+        </div>
+        <div class="mt-2 small" id="user-role-display"></div>
+    </div>
+</div>
+
