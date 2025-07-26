@@ -1,5 +1,7 @@
-// utils/api.ts
+import { api } from './api';
+
+
 export async function getBooks(query = '') {
-  const res = await fetch(`/api/books?search=${encodeURIComponent(query)}`);
-  return await res.json();
+  const res = await api.get('/books');
+  return res.data;
 }

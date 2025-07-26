@@ -1,9 +1,10 @@
 import axios from 'axios'
+import { access } from 'fs'
 import Cookies from 'js-cookie'
 import { toast } from 'react-hot-toast'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://localhost:8080',
   withCredentials: true,
 })
 
@@ -30,7 +31,7 @@ api.interceptors.response.use(
       }
 
       try {
-        const res = await axios.post('http://localhost:5000/refresh', {}, {
+        const res = await axios.post('http://localhost:8080/auth/refresh', {}, {
           headers: {
             Authorization: `Bearer ${refreshToken}`
           }

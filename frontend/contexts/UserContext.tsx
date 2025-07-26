@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Cookies from 'js-cookie'
-import { api } from '@/utils/api'
+import { api } from '@/utils/api/api'
 
 type User = {
   id: string
