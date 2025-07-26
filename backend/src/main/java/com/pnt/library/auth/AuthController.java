@@ -39,10 +39,10 @@ public class AuthController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         //create jwt
         String accessToken = jwtService.generateToken(userDetails.getUser());
-        //String refreshToken = jwtService.generateRefreshToken(userDetails.getUser());
+        String refreshToken = jwtService.generateRefreshToken(userDetails.getUser());
         return ResponseEntity.ok(new JwtResponse(
                 accessToken,
-                //refreshToken,
+                refreshToken,
                 userDetails.getUsername(),
                 userDetails.getUser().getRole().name(),
                 userDetails.getUser().getId()));
@@ -80,6 +80,6 @@ public class AuthController {
         UserEntity user = ((CustomUserDetails) userDetails).getUser();
 
         String newAccessToken = jwtService.generateToken(user);
-        return ResponseEntity.ok(new JwtResponse(newAccessToken, username, user.getRole().name(), user.getId()));
+        return ResponseEntity.ok(new JwtResponse(newAccessToken, refreshToken, username, user.getRole().name(), user.getId()));
     }
 }

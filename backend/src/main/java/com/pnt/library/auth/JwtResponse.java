@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class JwtResponse {
-    private String token;
-    //private String refreshToken;
+    private String accessToken;
+    private String refreshToken;
     private String username;
     private String role;
     private Long userId;
