@@ -22,7 +22,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
         if (response.ok) {
             alert("Đăng ký thành công");
-            window.location.href = "/pages/auth/login.html";
+            window.location.href = "/basic_frontend/pages/auth/login.html";
         }
         else {
             const msg = await response.text();

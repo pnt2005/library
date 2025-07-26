@@ -48,7 +48,7 @@ document.getElementById("editForm").addEventListener("submit", async function(e)
 
         if (res.ok) {
             alert("Cập nhật thành công!");
-            window.location.href = `/pages/reader/profile.html?id=${userId}`;
+            window.location.href = `/basic_frontend/pages/reader/profile.html?id=${userId}`;
         } else {
             const error = await res.json();
             alert("Lỗi: " + (error.message || "Cập nhật thất bại"));
@@ -61,7 +61,7 @@ document.getElementById("editForm").addEventListener("submit", async function(e)
 
 //Hủy
 document.getElementById("cancelBtn").addEventListener("click", () => {
-    window.location.href = `/pages/reader/profile.html?id=${userId}`;
+    window.location.href = `/basic_frontend/pages/reader/profile.html?id=${userId}`;
 });
 
 loadReader();

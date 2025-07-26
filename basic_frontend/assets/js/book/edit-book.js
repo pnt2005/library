@@ -4,7 +4,7 @@ const token = localStorage.getItem("token");
 
 if (!bookId) {
     alert("Không tìm thấy sách");
-    window.location.href = "/pages/index.html";
+    window.location.href = "/basic_frontend/pages/index.html";
 }
 
 const form = document.getElementById("editForm");
@@ -56,7 +56,7 @@ form.addEventListener("submit", async (e) => {
 
         if (res.ok) {
             alert("Cập nhật sách thành công");
-            window.location.href = `book-detail.html?id=${bookId}`;
+            window.location.href = `/basic_frontend/pages/book/book-detail.html?id=${bookId}`;
         }
         else alert("Lỗi khi cập nhật sách");
     }

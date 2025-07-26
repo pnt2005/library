@@ -66,7 +66,7 @@ document.getElementById("addToCartBtn").addEventListener("click", () => {
 
 //edit button
 document.getElementById("editBtn").addEventListener("click", () => {
-    window.location.href = `edit-book.html?id=${bookId}`;
+    window.location.href = `/basic_frontend/pages/book/edit-book.html?id=${bookId}`;
 })
 
 //delete button
@@ -81,7 +81,7 @@ document.getElementById("deleteBtn").addEventListener("click", async () => {
         });
         if (res.ok) {
             alert("Đã xóa sách");
-            window.location.href = "/pages/index.html";
+            window.location.href = "/basic_frontend/pages/index.html";
         }
         else {
             alert("Lỗi khi xóa sách");

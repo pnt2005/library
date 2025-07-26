@@ -28,7 +28,7 @@ async function loadProfile() {
 }
 
 document.getElementById("editBtn").addEventListener("click", () => {
-    window.location.href = `/pages/reader/edit-profile.html?id=${userId}`;
+    window.location.href = `/basic_frontend/pages/reader/edit-profile.html?id=${userId}`;
 });
 
 loadProfile();

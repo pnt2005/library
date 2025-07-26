@@ -1,5 +1,5 @@
 async function loadNavbar() {
-    const res = await fetch("/pages/common/navbar.html");
+    const res = await fetch("/basic_frontend/pages/common/navbar.html");
     const html = await res.text();
     document.getElementById("navbarContainer").innerHTML = html;
     updateCartCount();
@@ -39,7 +39,7 @@ function logout() {
     localStorage.removeItem("role");
     localStorage.removeItem("username");
     localStorage.removeItem("userId");
-    window.location.href = "/pages/index.html";
+    window.location.href = "/basic_frontend/pages/index.html";
 }
 
 loadNavbar();

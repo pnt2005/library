@@ -29,7 +29,7 @@ form.addEventListener("submit", async (e) => {
         if (res.ok) {
             alert("Thêm sách thành công");
             const newBook = await res.json();
-            window.location.href = `/pages/book/book-detail.html?id=${newBook.id}`;
+            window.location.href = `/basic_frontend/pages/book/book-detail.html?id=${newBook.id}`;
         }
         else alert("Lỗi khi thêm sách");
     }

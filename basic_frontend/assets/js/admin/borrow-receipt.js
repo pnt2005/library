@@ -29,7 +29,7 @@ async function loadBorrowHistory(data) {
                     <p><strong>Ngày trả:</strong> ${receipt.returnDate ? receipt.returnDate : '<em class="text-muted">Chưa có</em>'}</p>
                     <p>
                         <strong>Độc giả:</strong> 
-                        <a href="/pages/reader/profile.html?id=${receipt.reader.id}" class="text-body text-decoration-none">
+                        <a href="/basic_frontend/pages/reader/profile.html?id=${receipt.reader.id}" class="text-body text-decoration-none">
                             ${receipt.reader.username}
                         </a>
                     </p>
@@ -37,7 +37,7 @@ async function loadBorrowHistory(data) {
                     <ul>
                         ${receipt.borrowReceiptBooks.map((borrowReceiptBook, index) => `
                             <li>
-                                <a href="/pages/book/book-detail.html?id=${borrowReceiptBook.book.id}" class="text-body text-decoration-none">
+                                <a href="/basic_frontend/pages/book/book-detail.html?id=${borrowReceiptBook.book.id}" class="text-body text-decoration-none">
                                     ${index+1}. ${borrowReceiptBook.book.name} - ${borrowReceiptBook.book.author} - ${borrowReceiptBook.quantity}
                                 </a>
                             </li>

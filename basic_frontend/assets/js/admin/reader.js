@@ -21,7 +21,7 @@ function displayReaders(readers) {
     table.innerHTML = "";
     readers.forEach(reader => {
         const row = `
-            <tr onclick="window.location.href='/pages/reader/profile.html?id=${reader.id}'" style="cursor: pointer;">
+            <tr onclick="window.location.href='/basic_frontend/pages/reader/profile.html?id=${reader.id}'" style="cursor: pointer;">
                 <td>${reader.id}</td>
                 <td>${reader.username}</td>
                 <td>${reader.email}</td>

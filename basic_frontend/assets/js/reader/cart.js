@@ -25,7 +25,7 @@ function renderCart() {
     for (const book of cart) {
         html += `
             <tr>
-                <td onclick="window.location.href='/pages/book/book-detail.html?id=${book.id}'" style="cursor: pointer;">
+                <td onclick="window.location.href='/basic_frontend/pages/book/book-detail.html?id=${book.id}'" style="cursor: pointer;">
                     ${book.name}
                 </td>
                 <td>${book.author}</td>

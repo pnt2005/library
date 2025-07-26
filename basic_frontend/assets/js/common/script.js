@@ -15,7 +15,7 @@ function displayBooks(books) {
     books.forEach(book => {
         const card = `
             <div class="col">
-                <a href=/pages/book/book-detail.html?id=${book.id} class="text-decoration-none text-dark">
+                <a href=/basic_frontend/pages/book/book-detail.html?id=${book.id} class="text-decoration-none text-dark">
                     <div class="card h-100 shadow-sm hover-shadow" style="cursor: pointer;">
                         <img src="${book.image}" class="card-img-top" alt="${book.name}" style="height: 250px; object-fit: cover;">
                         <div class="card-body">
