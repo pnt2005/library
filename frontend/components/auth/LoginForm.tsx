@@ -2,32 +2,34 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/utils/api'
+import { api } from '@/utils/api/api'
 import Cookies from 'js-cookie'
 import { useUser } from '@/contexts/UserContext'
 import toast from 'react-hot-toast'
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
-  const { setUser } = useUser();
+  const { setUser } = useUser()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
     try {
-      const res = await api.post('/login', { email, password })
-      const { access_token, refresh_token } = res.data
+      const res = await api.post('/auth/login', { username, password })
+      const { accessToken, refreshToken } = res.data
 
-      Cookies.set('access_token', access_token)
-      Cookies.set('refresh_token', refresh_token, { expires: 30 })
+      Cookies.set('access_token', accessToken)
+      Cookies.set('refresh_token', refreshToken, { expires: 30 })
       toast.success('Login successful')
-      const response = await api.get("/me")
-      setUser(response.data);
-      router.push('/') // chuyển hướng sau khi login thành công
+
+      const response = await api.get('/auth/me')
+      setUser(response.data)
+
+      router.push('/')
     } catch (err: any) {
       toast.error(err.response?.data?.msg || 'Login fail')
     }
@@ -38,12 +40,12 @@ export default function LoginForm() {
       {error && <p className="text-red-500">{error}</p>}
 
       <div>
-        <label className="block text-sm font-medium">Email</label>
+        <label className="block text-sm font-medium">Username</label>
         <input
-          type="email"
+          type="text"
           className="w-full border p-2 rounded-md mt-1"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
       </div>
@@ -61,14 +63,14 @@ export default function LoginForm() {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+        className="w-full bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700"
       >
         Login
       </button>
 
       <p className="text-sm text-center mt-4">
-        Dont't have an account yet?{' '}
-        <a href="/register" className="text-blue-600 hover:underline">
+        Don't have an account yet?{' '}
+        <a href="/register" className="text-gray-600 hover:underline">
           Register
         </a>
       </p>
