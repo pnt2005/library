@@ -1,9 +1,14 @@
-// app/components/BookCard.tsx
-export const BookCard = ({ book }: { book: any }) => (
-  <div className="bg-white shadow-md rounded-2xl p-4">
-    <h2 className="text-xl font-semibold">{book.title}</h2>
-    <p className="text-sm text-gray-600">{book.author}</p>
-    <p className="text-sm mt-2">{book.description}</p>
-    <p className="mt-2 text-xs text-gray-500">ISBN: {book.isbn}</p>
-  </div>
-);
+// components/BookCard.tsx
+import { Book } from '@/types/book';
+
+
+export default function BookCard({ book }: {book: Book}) {
+  return (
+    <div className="border rounded p-4 shadow">
+      <img src={book.image} alt={book.name} className="w-full h-40 object-cover mb-2 rounded" />
+      <h2 className="text-lg font-semibold">{book.name}</h2>
+      <p className="text-sm text-gray-600">{book.author}</p>
+      <p className="text-sm text-gray-500">{book.description}</p>
+    </div>
+  );
+}
