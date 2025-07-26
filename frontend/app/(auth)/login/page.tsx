@@ -7,8 +7,8 @@ export default function LoginPage() {
   return (
     <main>
         <div className="mb-6 text-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            DevShare Lite
+          <Link href="/" className="text-2xl font-bold text-black-600">
+            Library
           </Link>
         </div>
         <LoginForm />

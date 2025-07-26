@@ -6,9 +6,9 @@ import Link from 'next/link'
 export default function RegisterPage() {
   return (
     <main>
-        <div className="mb-6 text-center">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            DevShare Lite
+        <div className="text-center">
+          <Link href="/" className="text-2xl font-bold text-black-600">
+            Library
           </Link>
         </div>
         <RegisterForm />
