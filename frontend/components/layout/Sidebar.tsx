@@ -1,22 +1,25 @@
-'use client'
+// app/components/Sidebar.tsx
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Home, FileText, FileEdit, Pencil, Tag } from 'lucide-react'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FileText, FileEdit, Pencil, Tag, Book, Receipt, User, ShoppingCart, ReceiptText } from 'lucide-react';
+import Chatbot from '../ChatBot';
+
 
 const links = [
-  { href: '/posts', label: 'Posts', icon: <FileText size={18} /> },
-  { href: '/drafts', label: 'Drafts', icon: <FileEdit size={18} /> },
-  { href: '/posts/new', label: 'Write Post', icon: <Pencil size={18} /> },
-  { href: '/tags', label: 'Tags', icon: <Tag size={18} /> },
-]
+  { href: '/books', label: 'Books', icon: <Book size={18} /> },
+  { href: '/receipts', label: 'Receipts', icon: <ReceiptText size={18} /> },
+  { href: '/users', label: 'Users', icon: <User size={18} /> },
+  { href: '/carts', label: 'Cart', icon: <ShoppingCart size={18} /> },
+];
 
 export default function Sidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
-    <aside className="w-56 fixed left-0 h-[calc(100vh-64px)] bg-gray-100 p-4 border-r overflow-y-auto z-40">
-      <nav className="flex flex-col gap-3">
+    <aside className="w-80 fixed left-0 h-[calc(100vh-80px)] bg-gray-100 p-4 border-r overflow-y-auto z-40 flex flex-col">
+      <nav className="flex flex-col gap-3 mb-4">
         {links.map(({ href, label, icon }) => (
           <Link
             key={href}
@@ -30,6 +33,8 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+
+      <Chatbot />
     </aside>
-  )
+  );
 }

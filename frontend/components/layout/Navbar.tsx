@@ -22,8 +22,8 @@ export default function Navbar() {
     <nav className="bg-white shadow sticky top-0 z-50 w-full">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-blue-600 whitespace-nowrap">
-          DevShare Lite
+        <Link href="/" className="text-xl font-bold text-black-600 whitespace-nowrap">
+          Library
         </Link>
 
         {/* Avatar / Login */}
@@ -31,12 +31,12 @@ export default function Navbar() {
           {user ? (
             <div className="flex items-center gap-4">
               <Link href="/profile" className="flex items-center gap-2 text-gray-700 hover:text-blue-600 truncate max-w-[120px]">
-                <img
+                {/* <img
                   src={user.avatar_url}
                   alt="Avatar"
                   className="w-8 h-8 rounded-full object-cover border"
-                />
-                <span className="text-sm truncate">{user.name}</span>
+                /> */}
+                <span className="text-sm truncate">{user.username}</span>
               </Link>
               <button
                 onClick={handleLogout}
@@ -46,7 +46,7 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
-            <Link href="/login" className="text-blue-600 font-medium">
+            <Link href="/login" className="text-black-600 font-medium">
               Login
             </Link>
           )}
