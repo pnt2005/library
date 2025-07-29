@@ -29,6 +29,12 @@ public class BookServiceImpl implements BookService {
     public List<BookResponseDTO> getBooks(Map<String, String> params) {
         Specification<BookEntity> specification = Specification.where(null);
 
+        if (params.containsKey("name")) {
+            String desc = params.get("name").toLowerCase();
+            specification = specification.and((root, query, cb) ->
+                    cb.like(cb.lower(root.get("name")), "%" + desc + "%"));
+        }
+
         if (params.containsKey("author")) {
             String author = params.get("author").toLowerCase();
             specification = specification.and((root, query, cb) ->
