@@ -7,7 +7,7 @@ export type Book = {
   year: number;
   quantity: number;
   price?: number; 
-  image?: string;
-  category?: string[];
+  image: string;
+  category: string;
   publisher: string;
 };
