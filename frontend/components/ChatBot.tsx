@@ -2,8 +2,10 @@
 import { useState } from 'react'
 import { sendMessageToAgent } from '@/utils/api/agent'
 import { useBookStore } from '@/store/bookStore'
+import { useRouter } from 'next/navigation'
 
 export default function ChatBox() {
+  const router = useRouter()
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<string[]>([])
   const setBooks = useBookStore((s) => s.setBooks)
@@ -15,9 +17,14 @@ export default function ChatBox() {
     setMessages((prev) => [...prev, `🧑‍💬: ${input}`])
 
     const res = await sendMessageToAgent(input)
-    setMessages((prev) => [...prev, `🤖: ${res.response}`])
-    setBooks(res.books || [])
     setInput('')
+    setMessages((prev) => [...prev, `🤖: ${res.response}`])
+    if (res.books?.length === 1) {
+      router.push(`/books/${res.books[0].id}`)
+    }
+    else {
+      setBooks(res.books || [])
+    }
   }
 
   return (
