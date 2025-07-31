@@ -1,8 +1,7 @@
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from agent.graph import run_agent
-from langchain_core.messages import HumanMessage
+from agent.runner import run_agent
 import uvicorn
 
 app = FastAPI()
@@ -18,7 +17,7 @@ async def ask(request: Request):
     body = await request.json()
     message = body["message"]
 
-    result = run_agent(HumanMessage(content=message))
+    result = run_agent(message)
     return result
 
 if __name__ == "__main__":

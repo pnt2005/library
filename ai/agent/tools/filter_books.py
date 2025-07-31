@@ -35,7 +35,6 @@ def filter_books(
     }
     params = {k: v for k, v in params.items() if v is not None}
     query = urlencode(params)
-    print(params)
     url = f"http://localhost:8080/books?{query}"
     try:
         response = requests.get(url, timeout=5)
