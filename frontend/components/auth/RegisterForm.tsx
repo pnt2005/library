@@ -10,7 +10,7 @@ export default function RegisterForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [birthday, setBirthday] = useState('')
-  const [phonenumber, setPhonenumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
   const [error, setError] = useState<{ [key: string]: string[] }>({})
   const router = useRouter()
@@ -24,7 +24,7 @@ export default function RegisterForm() {
         password,
         username,
         birthday,
-        phonenumber,
+        phoneNumber,
         address,
       })
       toast.success('Register successful')
@@ -94,8 +94,8 @@ export default function RegisterForm() {
         <input
           type="tel"
           className="w-full border p-2 rounded-md mt-1"
-          value={phonenumber}
-          onChange={(e) => setPhonenumber(e.target.value)}
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
           required
         />
         {error.phonenumber && <p className="text-red-500">{error.phonenumber[0]}</p>}
