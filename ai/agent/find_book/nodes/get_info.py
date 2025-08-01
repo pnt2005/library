@@ -1,5 +1,5 @@
 from langchain_core.messages import SystemMessage
-from agent.tools import filter_books_tool
+from agent.find_book.tools.filter_books import filter_books_tool
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 load_dotenv()
@@ -25,4 +25,4 @@ def get_info_prompt(messages):
 def get_info(state):
     messages = get_info_prompt(state["messages"])
     response = llm_with_tools.invoke(messages)
-    return {"messages": state["messages"] + [response]}
+    return {"messages": state["messages"] + [response]} 
