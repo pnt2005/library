@@ -5,7 +5,8 @@ import { useCartStore } from '@/store/cartStore'
 import { getBookById } from '@/utils/api/book'
 import { Book } from '@/types/book'
 import CartItemCard from '@/components/cart/CartItemCard'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
+import BorrowButton from '@/components/cart/BorrowButton'
 
 export default function CartPage() {
   const cartItems = useCartStore((state) => state.items)
@@ -36,7 +37,6 @@ export default function CartPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <Toaster />
       <h1 className="text-3xl font-bold mb-4">Cart</h1>
 
       {loading ? (
@@ -59,6 +59,9 @@ export default function CartPage() {
               />
             )
           })}
+          <div className="mt-6">
+            <BorrowButton />
+          </div>
         </div>
       )}
     </div>
