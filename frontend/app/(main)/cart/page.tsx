@@ -37,32 +37,33 @@ export default function CartPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Cart</h1>
 
       {loading ? (
         <p>Loading...</p>
       ) : cartItems.length === 0 ? (
         <p>No book in cart yet.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {cartItems.map((item) => {
-            const book = books[item.bookId]
-            if (!book) return null
-            return (
-              <CartItemCard
-                key={item.bookId}
-                book={book}
-                quantity={item.quantity}
-                onRemove={() => removeFromCart(item.bookId)}
-                onIncrease={() => increaseQuantity(item.bookId)}
-                onDecrease={() => decreaseQuantity(item.bookId)}
-              />
-            )
-          })}
-          <div className="mt-6">
-            <BorrowButton />
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {cartItems.map((item) => {
+              const book = books[item.bookId]
+              if (!book) return null
+              return (
+                <CartItemCard
+                  key={item.bookId}
+                  book={book}
+                  quantity={item.quantity}
+                  onRemove={() => removeFromCart(item.bookId)}
+                  onIncrease={() => increaseQuantity(item.bookId)}
+                  onDecrease={() => decreaseQuantity(item.bookId)}
+                />
+              )
+            })}
           </div>
+                <div className="mt-6">
+          <BorrowButton />
         </div>
+      </>
       )}
     </div>
   )

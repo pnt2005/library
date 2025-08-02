@@ -64,7 +64,12 @@ export default function CartItemCard({
 
           <button
             onClick={onIncrease}
-            className="p-1 rounded border hover:bg-gray-200"
+            disabled={book.quantity===quantity}
+            className={`p-1 rounded border ${
+              quantity === book.quantity
+                ? 'text-gray-400 border-gray-300 cursor-not-allowed'
+                : 'hover:bg-gray-200'
+            }`}
           >
             <Plus size={16} />
           </button>
