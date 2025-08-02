@@ -52,7 +52,7 @@ export default function BookDetail({ book }: { book: Book }) {
             <p className="text-gray-800 mt-2 whitespace-pre-line">{book.description}</p>
           </div>
 
-          <AddToCart bookId={book.id} availableQuantity={book.quantity} />
+          <AddToCart bookId={book.id} />
         </div>
       </div>
     </div>
