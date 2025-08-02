@@ -45,7 +45,7 @@ public class SecurityConfig {
 
                         //admin
                         .requestMatchers(HttpMethod.POST, "/admin/**").permitAll()
-                        
+
                         //reader
                         .requestMatchers(HttpMethod.GET, "/readers/").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/readers/**").authenticated()
@@ -61,7 +61,7 @@ public class SecurityConfig {
 
                         //borrow-receipt
                         .requestMatchers(HttpMethod.GET, "/borrow-receipts/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/borrow-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/borrow-receipts/**").hasRole("ADMIN")
 

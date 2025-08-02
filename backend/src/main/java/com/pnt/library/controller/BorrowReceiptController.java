@@ -60,4 +60,11 @@ public class BorrowReceiptController {
         URI location = URI.create("/borrow-receipts/" + responseDTO.getId());
         return ResponseEntity.created(location).body(responseDTO);
     }
+
+    @PostMapping("/{id}/return")
+    public ResponseEntity<BorrowReceiptResponseDTO> returnBorrowReceipt(@PathVariable Long id) {
+        BorrowReceiptResponseDTO responseDTO = borrowReceiptService.returnBorrowReceipt(id);
+        URI location = URI.create("/borrow-receipts/" + responseDTO.getId());
+        return ResponseEntity.created(location).body(responseDTO);
+    }
 }

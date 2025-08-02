@@ -151,6 +151,14 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         entity.setStatus(BorrowReceiptStatus.REJECTED);
         return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
     }
+    
+    @Override
+    public BorrowReceiptResponseDTO returnBorrowReceipt(Long id) {
+        BorrowReceiptEntity entity = findBorrowReceiptById(id);
+        entity.setStatus(BorrowReceiptStatus.RETURNED);
+        entity.setReturnDate(LocalDateTime.now());
+        return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
+    }
 
     private BorrowReceiptEntity findBorrowReceiptById(Long id) {
         return borrowReceiptRepository.findById(id)

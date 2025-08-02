@@ -18,4 +18,6 @@ public interface BorrowReceiptService {
     BorrowReceiptResponseDTO acceptBorrowReceipt(Long id);
 
     BorrowReceiptResponseDTO rejectBorrowReceipt(Long id);
+
+    BorrowReceiptResponseDTO returnBorrowReceipt(Long id);
 }
