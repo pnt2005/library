@@ -50,7 +50,6 @@ public class JwtService {
     }
 
     public String extractUsername(String token) {
-        //Key key = isRefresh ? getRefreshSigningKey() : getAccessSigningKey();
         return Jwts.parserBuilder()
                 .setSigningKey(getAccessSigningKey())
                 .build()
