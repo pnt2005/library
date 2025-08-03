@@ -75,6 +75,10 @@ export default function CartItemCard({
           </button>
         </div>
 
+        <div>
+          <span>Price: {quantity*book.price} VND</span>
+        </div>
+
         {/* Nút xóa */}
         <div className="mt-2">
           <button

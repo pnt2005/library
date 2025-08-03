@@ -27,9 +27,10 @@ export default function BookDetail({ book }: { book: Book }) {
           <p className="text-gray-600 italic">by {book.author}</p>
 
           <p><strong>Publisher:</strong> {book.publisher}</p>
-          <p><strong>Year:</strong> {book.year}</p>
+          <p><strong>Published year:</strong> {book.year}</p>
           <p><strong>ISBN:</strong> {book.isbn}</p>
-          <p><strong>Quantity:</strong> {book.quantity}</p>
+          <p><strong>Available quantity:</strong> {book.quantity}</p>
+          <p><strong>Price:</strong> {book.price} VND</p>
 
           {book.category && (
             <div>
