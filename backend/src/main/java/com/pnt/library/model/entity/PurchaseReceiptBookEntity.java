@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
-@Table(name = "borrow_receipt_book")
-public class BorrowReceiptBookEntity {
+@Table(name = "purchase_receipt_book")
+public class PurchaseReceiptBookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "borrow_receipt_id")
-    private BorrowReceiptEntity borrowReceipt;
+    @JoinColumn(name = "purchase_receipt_id")
+    private PurchaseReceiptEntity purchaseReceipt;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -23,4 +25,7 @@ public class BorrowReceiptBookEntity {
 
     @Column(name = "quantity")
     private Long quantity;
+
+    @Column(name = "price")
+    private BigDecimal price;
 }
