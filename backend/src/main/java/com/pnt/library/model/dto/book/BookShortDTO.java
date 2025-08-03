@@ -3,6 +3,8 @@ package com.pnt.library.model.dto.book;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class BookShortDTO {
@@ -14,4 +16,5 @@ public class BookShortDTO {
     private String category;
     private Long year;
     private Long quantity;
+    private BigDecimal price;
 }

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -28,6 +29,8 @@ public class BookRequestDTO {
     private Long year;
     @NotNull(message = "Quantity is required")
     private Long quantity;
+    @NotNull(message = "Price is required")
+    private BigDecimal price;
 
     private List<Long> borrowReceiptBookIds;
 }
