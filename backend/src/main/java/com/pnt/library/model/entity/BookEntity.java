@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,4 +46,7 @@ public class BookEntity {
 
     @OneToMany(mappedBy = "book")
     private List<BorrowReceiptBookEntity> borrowReceiptBooks = new ArrayList<>();
+
+    @Column(name = "price")
+    private BigDecimal price;
 }
