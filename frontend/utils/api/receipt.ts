@@ -24,3 +24,11 @@ export async function acceptReceipt(receiptId: string) {
     const res = await api.post(`/borrow-receipts/${receiptId}/accept`)
     return res.data
 }
+
+export async function purchaseBooks(payload: {
+    readerId: string, 
+    books: { bookId: string; quantity: number }[]
+}) {
+    const res = await api.post('/purchase-receipts', payload)
+    return res.data
+}

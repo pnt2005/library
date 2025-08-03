@@ -6,7 +6,7 @@ import { getBookById } from '@/utils/api/book'
 import { Book } from '@/types/book'
 import CartItemCard from '@/components/cart/CartItemCard'
 import toast from 'react-hot-toast'
-import BorrowButton from '@/components/cart/BorrowButton'
+import PurchaseButton from '@/components/cart/PurchaseButton'
 
 export default function CartPage() {
   const cartItems = useCartStore((state) => state.items)
@@ -35,6 +35,11 @@ export default function CartPage() {
     else setLoading(false)
   }, [cartItems])
 
+  const totalPrice = cartItems.reduce((sum, item) => {
+    const book = books[item.bookId]
+    return sum + (book?.price || 0) * item.quantity
+  }, 0)
+
   return (
     <div className="max-w-4xl mx-auto p-6">
 
@@ -60,9 +65,12 @@ export default function CartPage() {
               )
             })}
           </div>
-                <div className="mt-6">
-          <BorrowButton />
-        </div>
+
+          <div>Total price: {totalPrice}</div>
+
+          <div className="mt-6">
+            <PurchaseButton />
+          </div>
       </>
       )}
     </div>
