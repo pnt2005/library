@@ -65,6 +65,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/borrow-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/borrow-receipts/**").hasRole("ADMIN")
 
+                        //purchase-receipt
+                        .requestMatchers(HttpMethod.GET, "/purchase-receipts/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/purchase-receipts/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/purchase-receipts/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/purchase-receipts/**").hasRole("ADMIN")
+
                         //default
                         .anyRequest().authenticated()
                 )
