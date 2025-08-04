@@ -112,8 +112,9 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
                 .toBorrowReceiptEntity(dto, readerEntity);
 
         //set status and date time
-        borrowReceiptEntity.setStatus(BorrowReceiptStatus.PENDING);
-        borrowReceiptEntity.setCreateDate(LocalDateTime.now());
+        borrowReceiptEntity.setStatus(BorrowReceiptStatus.BORROWING);
+        borrowReceiptEntity.setBorrowDate(LocalDateTime.now());
+        borrowReceiptEntity.setReturnDate(LocalDateTime.now().plusDays(7));
 
         //create borrow receipt book
         List<BorrowReceiptBookEntity> borrowReceiptBookEntities = new ArrayList<>();
@@ -136,22 +137,6 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         borrowReceiptRepository.delete(findBorrowReceiptById(id));
     }
 
-    @Override
-    public BorrowReceiptResponseDTO acceptBorrowReceipt(Long id) {
-        BorrowReceiptEntity entity = findBorrowReceiptById(id);
-        entity.setBorrowDate(LocalDateTime.now());
-        entity.setReturnDate(LocalDateTime.now().plusDays(7));
-        entity.setStatus(BorrowReceiptStatus.ACCEPTED);
-        return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
-    }
-
-    @Override
-    public BorrowReceiptResponseDTO rejectBorrowReceipt(Long id) {
-        BorrowReceiptEntity entity = findBorrowReceiptById(id);
-        entity.setStatus(BorrowReceiptStatus.REJECTED);
-        return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
-    }
-    
     @Override
     public BorrowReceiptResponseDTO returnBorrowReceipt(Long id) {
         BorrowReceiptEntity entity = findBorrowReceiptById(id);
@@ -182,7 +167,7 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
 
     @Scheduled(cron = "0 0 0 * * ?") //0h every day
     public void updateOverdueScheduled() {
-        List<BorrowReceiptEntity> receipts = borrowReceiptRepository.findAllByStatus(BorrowReceiptStatus.ACCEPTED);
+        List<BorrowReceiptEntity> receipts = borrowReceiptRepository.findAllByStatus(BorrowReceiptStatus.BORROWING);
         for (BorrowReceiptEntity receipt : receipts) {
             if (LocalDateTime.now().isAfter(receipt.getReturnDate())) {
                 receipt.setStatus(BorrowReceiptStatus.OVERDUE);
@@ -192,7 +177,7 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
     }
 
     public void updateOverdue(BorrowReceiptEntity receipt) {
-        if (receipt.getStatus().equals(BorrowReceiptStatus.ACCEPTED) && LocalDateTime.now().isAfter(receipt.getReturnDate())) {
+        if (receipt.getStatus().equals(BorrowReceiptStatus.BORROWING) && LocalDateTime.now().isAfter(receipt.getReturnDate())) {
             receipt.setStatus(BorrowReceiptStatus.OVERDUE);
             borrowReceiptRepository.save(receipt);
         }

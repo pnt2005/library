@@ -47,20 +47,6 @@ public class BorrowReceiptController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/accept")
-    public ResponseEntity<BorrowReceiptResponseDTO> acceptBorrowReceipt(@PathVariable Long id) {
-        BorrowReceiptResponseDTO responseDTO = borrowReceiptService.acceptBorrowReceipt(id);
-        URI location = URI.create("/borrow-receipts/" + responseDTO.getId());
-        return ResponseEntity.created(location).body(responseDTO);
-    }
-
-    @PostMapping("/{id}/reject")
-    public ResponseEntity<BorrowReceiptResponseDTO> rejectBorrowReceipt(@PathVariable Long id) {
-        BorrowReceiptResponseDTO responseDTO = borrowReceiptService.rejectBorrowReceipt(id);
-        URI location = URI.create("/borrow-receipts/" + responseDTO.getId());
-        return ResponseEntity.created(location).body(responseDTO);
-    }
-
     @PostMapping("/{id}/return")
     public ResponseEntity<BorrowReceiptResponseDTO> returnBorrowReceipt(@PathVariable Long id) {
         BorrowReceiptResponseDTO responseDTO = borrowReceiptService.returnBorrowReceipt(id);
