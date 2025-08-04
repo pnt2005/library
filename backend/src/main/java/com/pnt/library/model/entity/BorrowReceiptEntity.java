@@ -29,9 +29,6 @@ public class BorrowReceiptEntity {
     @Enumerated(EnumType.STRING)
     private BorrowReceiptStatus status;
 
-    @Column(name = "create_Date")
-    private LocalDateTime createDate;
-
     @Column(name = "borrow_date")
     private LocalDateTime borrowDate;
 
