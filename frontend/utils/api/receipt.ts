@@ -8,7 +8,7 @@ export async function borrowBooks(payload: {
     return res.data
 }
 
-export async function getReceipts(readerName?: string) {
+export async function getBorrowReceipts(readerName?: string) {
     const res = await api.get('/borrow-receipts', {
         params: readerName ? { readerName } : {}
     })
@@ -20,15 +20,17 @@ export async function returnBooks(receiptId: string) {
     return res.data
 }
 
-export async function acceptReceipt(receiptId: string) {
-    const res = await api.post(`/borrow-receipts/${receiptId}/accept`)
-    return res.data
-}
-
 export async function purchaseBooks(payload: {
     readerId: string, 
     books: { bookId: string; quantity: number }[]
 }) {
     const res = await api.post('/purchase-receipts', payload)
+    return res.data
+}
+
+export async function getPurchaseReceipts(readerName?: string) {
+    const res = await api.get('/purchase-receipts', {
+        params: readerName ? { readerName } : {}
+    })
     return res.data
 }
