@@ -7,6 +7,10 @@ import { Book } from '@/types/book'
 import CartItemCard from '@/components/cart/CartItemCard'
 import toast from 'react-hot-toast'
 import PurchaseButton from '@/components/cart/PurchaseButton'
+import { useUser } from '@/contexts/UserContext'
+import BorrowButton from '@/components/cart/BorrowButton'
+import { Reader } from '@/types/reader'
+import { getReaders } from '@/utils/api/user'
 
 export default function CartPage() {
   const cartItems = useCartStore((state) => state.items)
@@ -15,6 +19,9 @@ export default function CartPage() {
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity)
   const [books, setBooks] = useState<Record<string, Book>>({})
   const [loading, setLoading] = useState(true)
+  const { user } = useUser()
+  const [readers, setReaders] = useState<Reader[]>([])
+  const [selectedReaderId, setSelectedReaderId] = useState<string>('')
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -34,6 +41,14 @@ export default function CartPage() {
     if (cartItems.length > 0) fetchBooks()
     else setLoading(false)
   }, [cartItems])
+
+  useEffect(() => {
+    if (user?.role === "ROLE_ADMIN")
+      getReaders()
+        .then(setReaders)
+        .catch(() => toast.error('Failed to load readers')) 
+  }, [])
+  
 
   const totalPrice = cartItems.reduce((sum, item) => {
     const book = books[item.bookId]
@@ -69,7 +84,30 @@ export default function CartPage() {
           <div>Total price: {totalPrice}</div>
 
           <div className="mt-6">
-            <PurchaseButton />
+            {user?.role==="ROLE_READER" && <PurchaseButton />}
+            {user?.role==="ROLE_ADMIN" && (
+              <>
+                <label className="block mb-2 font-medium">Select reader:</label>
+                <select
+                  className="border p-2 rounded w-full md:w-1/2"
+                  value={selectedReaderId}
+                  onChange={(e) => setSelectedReaderId(e.target.value)}
+                >
+                  <option value="">-- Choose a reader --</option>
+                  {readers.map((reader) => (
+                    <option key={reader.id} value={reader.id}>
+                      {reader.username}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedReaderId && (
+                  <div className="mt-4">
+                    <BorrowButton readerId={selectedReaderId} />
+                  </div>
+                )}
+              </>
+            )}
           </div>
       </>
       )}

@@ -4,28 +4,18 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useCartStore } from '@/store/cartStore'
 import { borrowBooks } from '@/utils/api/receipt'
-import { useUser } from '@/contexts/UserContext'
 
-export default function BorrowButton() {
+export default function BorrowButton({readerId}: {readerId: string}) {
   const cartItems = useCartStore((state) => state.items)
   const clearCart = useCartStore((state) => state.clearCart)
   const [loading, setLoading] = useState(false)
-  const { user } = useUser()
 
   const handleBorrow = async () => {
-    if (!user) {
-      toast.error('You need to login to borrow book')
-      return
-    }
-    if (cartItems.length === 0) {
-      toast.error('Cart is empty')
-      return
-    }
 
     setLoading(true)
     try {
       const payload = {
-        readerId: user?.id,
+        readerId: readerId,
         books: cartItems.map((item) => ({
           bookId: item.bookId,
           quantity: item.quantity
@@ -48,7 +38,7 @@ export default function BorrowButton() {
       disabled={loading}
       className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
     >
-      {loading ? 'Processing...' : 'Mượn sách'}
+      {loading ? 'Processing...' : 'Borrow'}
     </button>
   )
 }
