@@ -27,7 +27,7 @@ public class PurchaseReceiptConverter {
                 PurchaseReceiptResponseDTO.class);
 
         //convert reader entity to reader short dto
-        purchaseReceiptResponseDTO.setReader(readerConverter.toReaderShortDTO(purchaseReceiptEntity.getReader()));
+        purchaseReceiptResponseDTO.setReader(readerConverter.toReaderShortDTO(purchaseReceiptEntity.getReaderEntity()));
 
         //convert purchase book entity to purchase book dto
         List<PurchaseReceiptBookResponseDTO> purchaseReceiptBooks = new ArrayList<>();
@@ -42,7 +42,7 @@ public class PurchaseReceiptConverter {
     public PurchaseReceiptEntity toPurchaseReceiptEntity(PurchaseReceiptRequestDTO dto,
                                                          ReaderEntity reader) {
         PurchaseReceiptEntity entity = new PurchaseReceiptEntity();
-        entity.setReader(reader);
+        entity.setReaderEntity(reader);
         return entity;
     }
 }

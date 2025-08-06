@@ -21,7 +21,7 @@ public class PurchaseReceiptEntity {
 
     @ManyToOne
     @JoinColumn(name = "reader_id")
-    private ReaderEntity reader;
+    private ReaderEntity readerEntity;
 
     @OneToMany(mappedBy = "purchaseReceipt", cascade = CascadeType.ALL)
     private List<PurchaseReceiptBookEntity> purchaseReceiptBooks = new ArrayList<>();

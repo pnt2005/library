@@ -26,4 +26,7 @@ public class ReaderEntity extends UserEntity {
 
     @OneToMany(mappedBy = "readerEntity", cascade = CascadeType.ALL)
     private List<BorrowReceiptEntity> borrowReceiptEntities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "readerEntity", cascade = CascadeType.ALL)
+    private List<PurchaseReceiptEntity> purchaseReceiptEntities = new ArrayList<>();
 }
