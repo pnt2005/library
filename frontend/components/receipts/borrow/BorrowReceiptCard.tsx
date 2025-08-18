@@ -1,7 +1,7 @@
 'use client'
 
 import { BorrowReceipt } from "@/types/borrowReceipt"
-import BookCard from "../../book/BookCard"
+import Link from "next/link"
 
 type Props = {
   receipt: BorrowReceipt
@@ -10,6 +10,7 @@ type Props = {
 export default function BorrowReceiptCard({ receipt }: Props) {
 
   return (
+    <Link href={`/receipts/borrow/${receipt.id}`}>
     <div className="border rounded-xl shadow-md p-6 m-4 bg-white hover:bg-gray-50 space-y-4">
       <div className="grid grid-cols-4 gap-4 text-sm">
         <div>
@@ -32,20 +33,7 @@ export default function BorrowReceiptCard({ receipt }: Props) {
           <p>{receipt.status}</p>
         </div>
       </div>
-
-      <div>
-        <p className="font-semibold mb-2">Books:</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {receipt.borrowReceiptBooks.map((borrowReceiptBook, index) => (
-            <div key={index} className="relative">
-              <BookCard book={borrowReceiptBook.book} />
-              <span className="absolute top-2 right-2 bg-black text-white text-xs rounded px-2 py-0.5">
-                x{borrowReceiptBook.quantity}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
+    </Link>
   )
 }
