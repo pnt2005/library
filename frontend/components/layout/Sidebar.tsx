@@ -9,7 +9,8 @@ import { useCartStore } from '@/store/cartStore';
 
 const links = [
   { href: '/books', label: 'Books', icon: <Book size={18} /> },
-  { href: '/receipts', label: 'Receipts', icon: <ReceiptText size={18} /> },
+  { href: '/receipts/borrow', label: 'Borrow Receipts', icon: <ReceiptText size={18} /> },
+  { href: '/receipts/purchase', label: 'Purchase Receipts', icon: <ReceiptText size={18} /> },
   { href: '/users', label: 'Users', icon: <User size={18} /> },
   { href: '/cart', label: 'Cart', icon: <ShoppingCart size={18} /> },
 ];
