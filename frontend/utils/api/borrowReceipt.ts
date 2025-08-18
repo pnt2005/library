@@ -20,17 +20,7 @@ export async function returnBooks(receiptId: string) {
     return res.data
 }
 
-export async function purchaseBooks(payload: {
-    readerId: string, 
-    books: { bookId: string; quantity: number }[]
-}) {
-    const res = await api.post('/purchase-receipts', payload)
-    return res.data
-}
-
-export async function getPurchaseReceipts(readerName?: string) {
-    const res = await api.get('/purchase-receipts', {
-        params: readerName ? { readerName } : {}
-    })
+export async function getBorrowReceiptById(receiptId: string) {
+    const res = await api.get(`/borrow-receipts/${receiptId}`)
     return res.data
 }
