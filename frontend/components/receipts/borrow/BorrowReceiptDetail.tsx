@@ -24,6 +24,10 @@ export default function BorrowReceiptDetail({ receipt }: Props) {
           <p className="font-semibold">Status:</p>
           <p>{receipt?.status}</p>
         </div>
+        <div>
+          <p className="font-semibold">Total price:</p>
+          <p>{receipt?.totalPrice}</p>
+        </div>
             <p className="font-semibold mb-2">Books:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {receipt?.borrowReceiptBooks.map((borrowReceiptBook, index) => (

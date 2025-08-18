@@ -32,6 +32,10 @@ export default function BorrowReceiptCard({ receipt }: Props) {
           <p className="font-semibold">Status:</p>
           <p>{receipt.status}</p>
         </div>
+        <div>
+          <p className="font-semibold">Total price:</p>
+          <p>{receipt.totalPrice}</p>
+        </div>
       </div>
     </div>
     </Link>

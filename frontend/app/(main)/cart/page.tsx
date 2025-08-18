@@ -50,9 +50,14 @@ export default function CartPage() {
   }, [])
   
 
-  const totalPrice = cartItems.reduce((sum, item) => {
+  const totalBorrowPrice = cartItems.reduce((sum, item) => {
     const book = books[item.bookId]
-    return sum + (book?.price || 0) * item.quantity
+    return sum + (book?.borrowPrice || 0) * item.quantity
+  }, 0)
+
+  const totalPurchasePrice = cartItems.reduce((sum, item) => {
+    const book = books[item.bookId]
+    return sum + (book?.purchasePrice || 0) * item.quantity
   }, 0)
 
   return (
@@ -81,7 +86,8 @@ export default function CartPage() {
             })}
           </div>
 
-          <div>Total price: {totalPrice}</div>
+          <div>Total borrow price: {totalBorrowPrice}</div>
+          <div>Total purchase price: {totalPurchasePrice}</div>
 
           <div className="mt-6">
             {user?.role==="ROLE_READER" && <PurchaseButton />}

@@ -14,4 +14,5 @@ export type BorrowReceipt = {
         quantity: string
         book: Book
     } []
+    totalPrice: number
 }

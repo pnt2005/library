@@ -30,7 +30,8 @@ export default function BookDetail({ book }: { book: Book }) {
           <p><strong>Published year:</strong> {book.year}</p>
           <p><strong>ISBN:</strong> {book.isbn}</p>
           <p><strong>Available quantity:</strong> {book.quantity}</p>
-          <p><strong>Price:</strong> {book.price} VND</p>
+          <p><strong>Borrow Price:</strong> {book.borrowPrice} $</p>
+          <p><strong>Purchase Price:</strong> {book.purchasePrice} $</p>
 
           {book.category && (
             <div>
