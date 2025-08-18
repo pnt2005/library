@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useCartStore } from '@/store/cartStore'
-import { purchaseBooks } from '@/utils/api/receipt'
 import { useUser } from '@/contexts/UserContext'
+import { purchaseBooks } from '@/utils/api/purchaseReceipt'
 
 export default function PurchaseButton() {
   const cartItems = useCartStore((state) => state.items)

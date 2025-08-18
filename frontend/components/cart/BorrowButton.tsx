@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useCartStore } from '@/store/cartStore'
-import { borrowBooks } from '@/utils/api/receipt'
+import { borrowBooks } from '@/utils/api/borrowReceipt'
 
 export default function BorrowButton({readerId}: {readerId: string}) {
   const cartItems = useCartStore((state) => state.items)
