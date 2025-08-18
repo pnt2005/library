@@ -7,6 +7,7 @@ import com.pnt.library.model.dto.reader.ReaderShortDTO;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,4 +23,5 @@ public class BorrowReceiptResponseDTO {
     private LocalDateTime borrowDate;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime returnDate;
+    private BigDecimal totalPrice;
 }

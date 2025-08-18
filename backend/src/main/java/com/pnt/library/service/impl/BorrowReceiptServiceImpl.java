@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -117,16 +118,26 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         borrowReceiptEntity.setReturnDate(LocalDateTime.now().plusDays(7));
 
         //create borrow receipt book
+        BigDecimal totalPrice = BigDecimal.ZERO;
         List<BorrowReceiptBookEntity> borrowReceiptBookEntities = new ArrayList<>();
         for (BorrowReceiptBookRequestDTO borrowReceiptBookRequestDTO : dto.getBooks()) {
             BorrowReceiptBookEntity borrowReceiptBook = new BorrowReceiptBookEntity();
             borrowReceiptBook.setBorrowReceipt(borrowReceiptEntity);
             borrowReceiptBook.setQuantity(borrowReceiptBookRequestDTO.getQuantity());
             borrowReceiptBook.setBook(findBookById(borrowReceiptBookRequestDTO.getBookId()));
+            borrowReceiptBook.setPrice(
+                    borrowReceiptBook.getBook().getBorrowPrice().multiply(
+                            BigDecimal.valueOf(borrowReceiptBook.getQuantity())
+                    )
+            );
             borrowReceiptBookEntities.add(borrowReceiptBook);
+            totalPrice = totalPrice.add(borrowReceiptBook.getPrice());
         }
         borrowReceiptEntity.setBorrowReceiptBooks(borrowReceiptBookEntities);
 
+        //set total price
+        borrowReceiptEntity.setTotalPrice(totalPrice);
+        
         return borrowReceiptConverter.toBorrowReceiptDTO(
                 borrowReceiptRepository.save(borrowReceiptEntity)
         );

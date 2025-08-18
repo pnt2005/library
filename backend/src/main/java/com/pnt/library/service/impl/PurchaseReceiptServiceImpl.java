@@ -116,7 +116,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
             purchaseReceiptBook.setQuantity(purchaseReceiptBookRequestDTO.getQuantity());
             purchaseReceiptBook.setBook(findBookById(purchaseReceiptBookRequestDTO.getBookId()));
             purchaseReceiptBook.setPrice(
-                    purchaseReceiptBook.getBook().getPrice().multiply(
+                    purchaseReceiptBook.getBook().getPurchasePrice().multiply(
                             BigDecimal.valueOf(purchaseReceiptBook.getQuantity())
                     )
             );

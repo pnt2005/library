@@ -19,6 +19,7 @@ public class BookResponseDTO {
     private String category;
     private Long year;
     private Long quantity;
-    private BigDecimal price;
+    private BigDecimal borrowPrice;
+    private BigDecimal purchasePrice;
     private List<Long> borrowReceiptBookIds;
 }

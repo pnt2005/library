@@ -47,6 +47,9 @@ public class BookEntity {
     @OneToMany(mappedBy = "book")
     private List<BorrowReceiptBookEntity> borrowReceiptBooks = new ArrayList<>();
 
-    @Column(name = "price")
-    private BigDecimal price;
+    @Column(name = "borrow_price")
+    private BigDecimal borrowPrice;
+
+    @Column(name = "purchase_price")
+    private BigDecimal purchasePrice;
 }

@@ -29,8 +29,10 @@ public class BookRequestDTO {
     private Long year;
     @NotNull(message = "Quantity is required")
     private Long quantity;
-    @NotNull(message = "Price is required")
-    private BigDecimal price;
+    @NotNull(message = "Borrow price is required")
+    private BigDecimal borrowPrice;
+    @NotNull(message = "Purchase price is required")
+    private BigDecimal purchasePrice;
 
     private List<Long> borrowReceiptBookIds;
 }
