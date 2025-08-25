@@ -76,8 +76,8 @@ export default function CartItemCard({
         </div>
 
         <div>
-          <p>Borrow Price: {quantity*book.borrowPrice} VND</p>
-          <p>Purchase Price: {quantity*book.purchasePrice} VND</p>
+          <p>Borrow Price: {quantity*book.borrowPrice}$</p>
+          <p>Purchase Price: {quantity*book.purchasePrice}$</p>
         </div>
 
         {/* Nút xóa */}
