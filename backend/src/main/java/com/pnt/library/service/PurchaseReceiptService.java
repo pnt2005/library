@@ -14,4 +14,8 @@ public interface PurchaseReceiptService {
     PurchaseReceiptResponseDTO createPurchaseReceipt(PurchaseReceiptRequestDTO PurchaseReceiptRequestDTO);
 
     void deletePurchaseReceipt(Long id);
+
+    PurchaseReceiptResponseDTO approvePurchaseReceipt(Long id);
+
+    PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id);
 }

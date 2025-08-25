@@ -138,6 +138,22 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
         purchaseReceiptRepository.delete(findPurchaseReceiptById(id));
     }
 
+    @Override
+    public PurchaseReceiptResponseDTO approvePurchaseReceipt(Long id) {
+        PurchaseReceiptEntity entity = findPurchaseReceiptById(id);
+        entity.setStatus(PurchaseReceiptStatus.APPROVED);
+        return purchaseReceiptConverter.toPurchaseReceiptDTO(
+                purchaseReceiptRepository.save(entity));
+    }
+
+    @Override
+    public PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id) {
+        PurchaseReceiptEntity entity = findPurchaseReceiptById(id);
+        entity.setStatus(PurchaseReceiptStatus.RECEIVED);
+        return purchaseReceiptConverter.toPurchaseReceiptDTO(
+                purchaseReceiptRepository.save(entity));
+    }
+
     private ReaderEntity findReaderById(Long readerId) {
         return readerRepository.findById(readerId)
                 .orElseThrow(() -> new ResourceNotFoundException("reader with id " + readerId + " not found"));

@@ -46,4 +46,18 @@ public class PurchaseReceiptController {
         purchaseReceiptService.deletePurchaseReceipt(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/approve")
+    public ResponseEntity<PurchaseReceiptResponseDTO> approvePurchaseReceipt(@PathVariable Long id) {
+        PurchaseReceiptResponseDTO purchaseReceiptResponseDTO = purchaseReceiptService.approvePurchaseReceipt(id);
+        URI location = URI.create("/purchase-receipts/" + purchaseReceiptResponseDTO.getId());
+        return ResponseEntity.created(location).body(purchaseReceiptResponseDTO);
+    }
+
+    @PostMapping("/{id}/receive")
+    public ResponseEntity<PurchaseReceiptResponseDTO> receivePurchaseReceipt(@PathVariable Long id) {
+        PurchaseReceiptResponseDTO purchaseReceiptResponseDTO = purchaseReceiptService.receivePurchaseReceipt(id);
+        URI location = URI.create("/purchase-receipts/" + purchaseReceiptResponseDTO.getId());
+        return ResponseEntity.created(location).body(purchaseReceiptResponseDTO);
+    }
 }
