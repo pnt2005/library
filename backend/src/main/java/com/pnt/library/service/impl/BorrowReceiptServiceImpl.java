@@ -115,7 +115,7 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         //set status and date time
         borrowReceiptEntity.setStatus(BorrowReceiptStatus.BORROWING);
         borrowReceiptEntity.setBorrowDate(LocalDateTime.now());
-        borrowReceiptEntity.setReturnDate(LocalDateTime.now().plusDays(7));
+        borrowReceiptEntity.setReturnDate(LocalDate.now().plusDays(30).atTime(23, 59));
 
         //create borrow receipt book
         BigDecimal totalPrice = BigDecimal.ZERO;
@@ -137,7 +137,7 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
 
         //set total price
         borrowReceiptEntity.setTotalPrice(totalPrice);
-        
+
         return borrowReceiptConverter.toBorrowReceiptDTO(
                 borrowReceiptRepository.save(borrowReceiptEntity)
         );
@@ -153,6 +153,14 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         BorrowReceiptEntity entity = findBorrowReceiptById(id);
         entity.setStatus(BorrowReceiptStatus.RETURNED);
         entity.setReturnDate(LocalDateTime.now());
+        return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
+    }
+
+    @Override
+    public BorrowReceiptResponseDTO renewBorrowReceipt(Long id) {
+        BorrowReceiptEntity entity = findBorrowReceiptById(id);
+        entity.setStatus(BorrowReceiptStatus.EXTENDING);
+        entity.setReturnDate(entity.getReturnDate().plusDays(7));
         return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
     }
 
@@ -184,13 +192,6 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
                 receipt.setStatus(BorrowReceiptStatus.OVERDUE);
                 borrowReceiptRepository.save(receipt);
             }
-        }
-    }
-
-    public void updateOverdue(BorrowReceiptEntity receipt) {
-        if (receipt.getStatus().equals(BorrowReceiptStatus.BORROWING) && LocalDateTime.now().isAfter(receipt.getReturnDate())) {
-            receipt.setStatus(BorrowReceiptStatus.OVERDUE);
-            borrowReceiptRepository.save(receipt);
         }
     }
 }

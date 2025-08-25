@@ -16,4 +16,6 @@ public interface BorrowReceiptService {
     void deleteBorrowReceipt(Long id);
 
     BorrowReceiptResponseDTO returnBorrowReceipt(Long id);
+
+    BorrowReceiptResponseDTO renewBorrowReceipt(Long id);
 }
