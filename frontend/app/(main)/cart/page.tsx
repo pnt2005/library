@@ -86,8 +86,8 @@ export default function CartPage() {
             })}
           </div>
 
-          <div>Total borrow price: {totalBorrowPrice}</div>
-          <div>Total purchase price: {totalPurchasePrice}</div>
+          <div>Total borrow price: {totalBorrowPrice}$</div>
+          <div>Total purchase price: {totalPurchasePrice}$</div>
 
           <div className="mt-6">
             {user?.role==="ROLE_READER" && <PurchaseButton />}
