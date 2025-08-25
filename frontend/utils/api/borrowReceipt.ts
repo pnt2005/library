@@ -24,3 +24,8 @@ export async function getBorrowReceiptById(receiptId: string) {
     const res = await api.get(`/borrow-receipts/${receiptId}`)
     return res.data
 }
+
+export async function renewBorrowReceipt(receiptId: string) {
+    const res = await api.post(`/borrow-receipts/${receiptId}/renew`)
+    return res.data
+}
