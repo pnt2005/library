@@ -75,7 +75,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        String username = jwtService.extractUsername(refreshToken);
+        String username = jwtService.extractUsernameFromRefreshToken(refreshToken);
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
         UserEntity user = ((CustomUserDetails) userDetails).getUser();
 

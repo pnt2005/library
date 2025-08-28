@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             //get jwt and username
             String jwt = authHeader.substring(7); //remove "Bearer "
-            String username = jwtService.extractUsername(jwt);
+            String username = jwtService.extractUsernameFromAccessToken(jwt);
 
             //check username and user is not auth in SecurityContext
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
