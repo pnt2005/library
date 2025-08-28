@@ -4,7 +4,7 @@ export async function purchaseBooks(payload: {
     readerId: string, 
     books: { bookId: string; quantity: number }[]
 }) {
-    const res = await api.post('/purchase-receipts', payload)
+    const res = await api.post('/checkout', payload)
     return res.data
 }
 

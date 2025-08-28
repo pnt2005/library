@@ -5,10 +5,12 @@ import toast from 'react-hot-toast'
 import { useCartStore } from '@/store/cartStore'
 import { useUser } from '@/contexts/UserContext'
 import { purchaseBooks } from '@/utils/api/purchaseReceipt'
+import { loadStripe } from '@stripe/stripe-js'
+
+const stripePromise = loadStripe("pk_test_51S029qFZzQxfehlUM3kZNJBqxyMwYsohFdFcIKaNAo34eCY7vjRx99srdxh4iaOGrKnaGCznvwcKeDL0uXHKpbj900fniZCbKO")
 
 export default function PurchaseButton() {
   const cartItems = useCartStore((state) => state.items)
-  const clearCart = useCartStore((state) => state.clearCart)
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
 
@@ -32,9 +34,9 @@ export default function PurchaseButton() {
         }))
       }
 
-      await purchaseBooks(payload)
-      toast.success('Books bought successfully')
-      clearCart()
+      const data = await purchaseBooks(payload)
+      const stripe = await stripePromise
+      await stripe?.redirectToCheckout({sessionId: data.sessionId})
     } catch (err) {
       toast.error('Failed to buy books')
     } finally {
