@@ -25,7 +25,8 @@ export default function ReceiptListPage() {
 
     return (
         <main className="p-4">
-            {borrowReceipts.map((receipt) => (
+            {borrowReceipts.length === 0 ? <p>No receipts found</p> : 
+            borrowReceipts.map((receipt) => (
                 <BorrowReceiptCard key={receipt.id} receipt={receipt}/>
             ))}
         </main>

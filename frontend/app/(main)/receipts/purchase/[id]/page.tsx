@@ -2,6 +2,7 @@
 
 import PurchaseReceiptDetail from "@/components/receipts/purchase/PurchaseReceiptDetail";
 import { useUser } from "@/contexts/UserContext";
+import { useCartStore } from "@/store/cartStore";
 import { PurchaseReceipt } from "@/types/purchaseReceipt";
 import { approvePurchaseReceipt, getPurchaseReceiptById, receivePurchaseReceipt } from "@/utils/api/purchaseReceipt";
 import { notFound, useParams } from "next/navigation";
@@ -9,10 +10,15 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PurchaseReceiptDetailPage() {
-    const {id} = useParams()
+    const {id, check} = useParams()
     const [receipt, setReceipt] = useState<PurchaseReceipt | null>(null)
     const {user} = useUser()
+    const clearCart = useCartStore((state) => state.clearCart)
 
+    if (check) {
+        toast.success('Books bought successfully')
+        clearCart()
+    }
     useEffect(() => {
         const fetch = async () => {
             getPurchaseReceiptById(id as string).then(setReceipt)
@@ -43,7 +49,7 @@ export default function PurchaseReceiptDetailPage() {
     return (
         <>
             <PurchaseReceiptDetail receipt={receipt} />
-            {user?.role==="ROLE_ADMIN" && receipt?.status==="PENDING" &&
+            {user?.role==="ROLE_ADMIN" && receipt?.status==="PAID" &&
                 <button
                     onClick={handleApprove}
                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
