@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { access } from 'fs'
 import Cookies from 'js-cookie'
 import { toast } from 'react-hot-toast'
 
@@ -8,11 +7,27 @@ export const api = axios.create({
   withCredentials: true,
 })
 
+// Các endpoint public không cần gửi token
+const PUBLIC_ENDPOINTS = [
+  { method: 'GET', path: /^\/books/ },
+  { method: 'POST', path: /^\/auth\// },
+  { method: 'GET', path: /^\/cart/ },
+]
+
 api.interceptors.request.use((config) => {
   const token = Cookies.get('access_token')
-  if (token) {
+
+  // Check nếu request nằm trong public endpoints thì bỏ qua attach token
+  const isPublic = PUBLIC_ENDPOINTS.some(
+    (rule) =>
+      rule.method === config.method?.toUpperCase() &&
+      rule.path.test(config.url || '')
+  )
+
+  if (!isPublic && token) {
     config.headers.Authorization = `Bearer ${token}`
   }
+
   return config
 })
 
@@ -26,7 +41,6 @@ api.interceptors.response.use(
 
       const refreshToken = Cookies.get('refresh_token')
       if (!refreshToken) {
-        //Không có refresh_token => user chưa đăng nhập
         return Promise.reject(error)
       }
 
@@ -44,9 +58,7 @@ api.interceptors.response.use(
         return axios(originalRequest)
 
       } catch (refreshError) {
-        //Chỉ toast khi user đã từng đăng nhập (có refresh_token)
         toast.error('Your session has expired. Please log in again.')
-
         Cookies.remove('access_token')
         Cookies.remove('refresh_token')
         setTimeout(() => {
