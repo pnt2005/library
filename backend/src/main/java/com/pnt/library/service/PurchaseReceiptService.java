@@ -1,5 +1,6 @@
 package com.pnt.library.service;
 
+import com.pnt.library.enums.PurchaseReceiptStatus;
 import com.pnt.library.model.dto.purchaseReceipt.PurchaseReceiptRequestDTO;
 import com.pnt.library.model.dto.purchaseReceipt.PurchaseReceiptResponseDTO;
 
@@ -15,7 +16,7 @@ public interface PurchaseReceiptService {
 
     void deletePurchaseReceipt(Long id);
 
-    PurchaseReceiptResponseDTO approvePurchaseReceipt(Long id);
-
     PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id);
+
+    PurchaseReceiptResponseDTO updateStatus(Long id, PurchaseReceiptStatus status);
 }

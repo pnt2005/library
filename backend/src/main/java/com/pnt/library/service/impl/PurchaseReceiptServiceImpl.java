@@ -104,7 +104,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
                 .toPurchaseReceiptEntity(dto, readerEntity);
 
         //set status and date time
-        purchaseReceiptEntity.setStatus(PurchaseReceiptStatus.PENDING);
+        purchaseReceiptEntity.setStatus(PurchaseReceiptStatus.PAID);
         purchaseReceiptEntity.setCreateDate(LocalDateTime.now());
 
         //create purchase receipt book
@@ -139,17 +139,17 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
     }
 
     @Override
-    public PurchaseReceiptResponseDTO approvePurchaseReceipt(Long id) {
+    public PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id) {
         PurchaseReceiptEntity entity = findPurchaseReceiptById(id);
-        entity.setStatus(PurchaseReceiptStatus.APPROVED);
+        entity.setStatus(PurchaseReceiptStatus.RECEIVED);
         return purchaseReceiptConverter.toPurchaseReceiptDTO(
                 purchaseReceiptRepository.save(entity));
     }
 
     @Override
-    public PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id) {
+    public PurchaseReceiptResponseDTO updateStatus(Long id, PurchaseReceiptStatus status) {
         PurchaseReceiptEntity entity = findPurchaseReceiptById(id);
-        entity.setStatus(PurchaseReceiptStatus.RECEIVED);
+        entity.setStatus(status);
         return purchaseReceiptConverter.toPurchaseReceiptDTO(
                 purchaseReceiptRepository.save(entity));
     }
