@@ -61,13 +61,13 @@ public class SecurityConfig {
 
                         //borrow-receipt
                         .requestMatchers(HttpMethod.GET, "/borrow-receipts/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/borrow-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/borrow-receipts/**").hasRole("ADMIN")
 
                         //purchase-receipt
-                        .requestMatchers(HttpMethod.GET, "/purchase-receipts/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/purchase-receipts/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/purchase-receipts/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/purchase-receipts/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/purchase-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/purchase-receipts/**").hasRole("ADMIN")
 
