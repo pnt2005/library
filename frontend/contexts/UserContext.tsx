@@ -38,7 +38,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     if (!needsAuth) return
 
     api
-      .get('/me')
+      .get('/auth/me')
       .then((res) => setUser(res.data as User))
       .catch(() => setUser(null))
   }, [pathname])
