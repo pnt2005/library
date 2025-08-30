@@ -27,7 +27,7 @@ export default function CartItemCard({
         <Image
           src={book.image}
           alt={book.name}
-          width={80}
+          width={130}
           height={100}
           className="rounded object-cover shadow"
         />
@@ -75,16 +75,16 @@ export default function CartItemCard({
           </button>
         </div>
 
-        <div>
+        <div className='mt-2'>
           <p>Borrow Price: {quantity*book.borrowPrice}$</p>
           <p>Purchase Price: {quantity*book.purchasePrice}$</p>
         </div>
 
         {/* Nút xóa */}
-        <div className="mt-2">
+        <div>
           <button
             onClick={onRemove}
-            className="text-red-600 hover:bg-red-100 p-2 rounded flex items-center gap-1 text-sm"
+            className="text-red-600 hover:bg-red-100 p-1 rounded flex items-center gap-1"
           >
             <Trash size={16} /> Remove
           </button>

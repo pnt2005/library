@@ -24,11 +24,6 @@ export default function BorrowReceiptCard({ receipt }: Props) {
         </div>
 
         <div>
-          <p className="font-semibold">Return date:</p>
-          <p>{receipt.returnDate}</p>
-        </div>
-
-        <div>
           <p className="font-semibold">Status:</p>
           <p>{receipt.status}</p>
         </div>

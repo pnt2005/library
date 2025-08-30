@@ -41,12 +41,12 @@ export default function BorrowReceiptDetailPage() {
     }
 
     return (
-        <>
+        <div className="m-4">
             <BorrowReceiptDetail receipt={receipt} />
             {user?.role==="ROLE_ADMIN" && receipt?.status==="BORROWING" && 
                 <button
                     onClick={handleReturn}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                    className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
                 >
                     Return
                 </button>
@@ -54,11 +54,11 @@ export default function BorrowReceiptDetailPage() {
             {user?.role==="ROLE_READER" && receipt?.status==="BORROWING" && 
                 <button
                     onClick={handleRenew}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                    className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
                 >
                     Extend borrow date
                 </button>
             }
-        </>
+        </div>
     )
 }

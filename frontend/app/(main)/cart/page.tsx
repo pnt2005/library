@@ -86,7 +86,7 @@ export default function CartPage() {
             })}
           </div>
 
-          <div>Total borrow price: {totalBorrowPrice}$</div>
+          <div className='mt-4'>Total borrow price: {totalBorrowPrice}$</div>
           <div>Total purchase price: {totalPurchasePrice}$</div>
 
           <div className="mt-6">

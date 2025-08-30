@@ -10,11 +10,8 @@ export default function BookCard({ book }: { book: Book }) {
         <img
           src={book.image}
           alt={book.name}
-          className="w-full h-40 object-cover mb-2 rounded"
+          className="w-full h-60 object-cover mb-2 rounded"
         />
-        <h2 className="text-lg font-semibold">{book.name}</h2>
-        <p className="text-sm text-gray-600">{book.author}</p>
-        <p className="text-sm text-gray-500 line-clamp-2">{book.description}</p>
       </div>
     </Link>
   )
