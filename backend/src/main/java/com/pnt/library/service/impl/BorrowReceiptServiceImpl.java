@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -162,6 +163,21 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         entity.setStatus(BorrowReceiptStatus.EXTENDING);
         entity.setReturnDate(entity.getReturnDate().plusDays(7));
         return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
+    }
+
+    @Override
+    public List<Map<String, Object>> getDailyStats() {
+        List<Object[]> results = borrowReceiptRepository.countReceiptsAndTotalPriceByDay();
+        List<Map<String, Object>> stats = new ArrayList<>();
+
+        for (Object[] row : results) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("date", row[0].toString()); // yyyy-MM-dd
+            map.put("count", ((Number) row[1]).longValue());
+            map.put("totalPrice", ((Number) row[2]).doubleValue());
+            stats.add(map);
+        }
+        return stats;
     }
 
     private BorrowReceiptEntity findBorrowReceiptById(Long id) {

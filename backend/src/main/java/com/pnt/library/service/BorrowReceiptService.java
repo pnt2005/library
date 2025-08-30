@@ -18,4 +18,7 @@ public interface BorrowReceiptService {
     BorrowReceiptResponseDTO returnBorrowReceipt(Long id);
 
     BorrowReceiptResponseDTO renewBorrowReceipt(Long id);
+
+    List<Map<String, Object>> getDailyStats();
+    
 }

@@ -19,4 +19,6 @@ public interface PurchaseReceiptService {
     PurchaseReceiptResponseDTO receivePurchaseReceipt(Long id);
 
     PurchaseReceiptResponseDTO updateStatus(Long id, PurchaseReceiptStatus status);
+
+    List<Map<String, Object>> getDailyStats();
 }
