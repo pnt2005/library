@@ -28,7 +28,7 @@ It also includes an **AI-powered chatbot assistant** to help users quickly find 
 - 📘 **Book Management**: CRUD for books (title, author, publisher, ISBN, etc.)  
 - 📑 **Borrowing System**: Borrow receipts, due dates, total cost calculation  
 - 🛒 **Purchase System**: Shopping cart + purchase receipts + online payment
-- 🤖 **Chatbot Assistant**: AI-powered chatbot (LangGraph + GPT) that supports queries
+- 🤖 **Chatbot Assistant**: AI-powered chatbot (LangGraph + GPT, via FastAPI server) that supports queries
 - 📊 **Statistics Dashboard**: Sales, borrow trends, and reader insights  
 - 🔐 **Authentication & Authorization**: Role-based access (Spring Security ready)  
 
@@ -48,12 +48,13 @@ It also includes an **AI-powered chatbot assistant** to help users quickly find 
 - 🎨 **Tailwind CSS + ShadCN UI**  
 - 🗂️ **Zustand** (state management for cart)  
 - 🔔 **React Hot Toast** (notifications)  
-- 💬 **Floating Chatbot widget** (integrated into UI)  
+- 💬 **Floating Chatbot widget** (integrated into UI, calls AI server)  
 
 ### AI Assistant  
+- ⚡ FastAPI (AI server layer)
 - 🔗 **LangGraph + OpenAI GPT**  
 - 🧠 Context-aware conversation with memory  
-- 📚 Can query the book database and suggest results  
+- 📚 Queries the backend book database via API and returns results to frontend
 
 ### Others  
 - 💳 **Stripe** for online payments   
