@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       "m.media-amazon.com",
       "tse3.mm.bing.net"
     ]
-  }
+  },
 };
 
 export default nextConfig;
