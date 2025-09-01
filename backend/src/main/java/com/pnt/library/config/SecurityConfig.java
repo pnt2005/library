@@ -61,7 +61,7 @@ public class SecurityConfig {
 
                         //borrow-receipt
                         .requestMatchers(HttpMethod.GET, "/borrow-receipts/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/borrow-receipts/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/borrow-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/borrow-receipts/**").hasRole("ADMIN")
 
