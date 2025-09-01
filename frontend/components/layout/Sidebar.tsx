@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { Book, ShoppingCart, ReceiptText, ChartNoAxesCombinedIcon } from 'lucide-react';
-import Chatbot from '../ChatBot';
+import Chatbot from '../chatbot/ChatBox';
 import { useCartStore } from '@/store/cartStore';
 import { useUser } from '@/contexts/UserContext';
 import toast from 'react-hot-toast';
@@ -28,7 +28,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-80 fixed left-0 h-[calc(100vh-80px)] bg-gray-100 p-4 border-r overflow-y-auto z-40 flex flex-col">
+    <aside className="w-60 fixed left-0 h-[calc(100vh-60px)] bg-gray-100 p-4 border-r overflow-y-auto z-40 flex flex-col">
       <nav className="flex flex-col gap-3 mb-4">
         {links
         . filter(({ needAuth, needAdmin }) => {
@@ -58,7 +58,6 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      <Chatbot />
     </aside>
   );
 }
