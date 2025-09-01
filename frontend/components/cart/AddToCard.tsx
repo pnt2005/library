@@ -22,7 +22,7 @@ export default function AddToCart({ bookId }: Props) {
       onClick={handleAdd}
       disabled={!!item}
       className={`text-white px-4 py-2 rounded
-        ${item ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+        ${item ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-700'}`}
     >
       {item ? 'Already in Cart' : 'Add to Cart'}
     </button>
