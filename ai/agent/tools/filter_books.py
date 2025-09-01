@@ -4,6 +4,7 @@ from urllib.parse import urlencode
 from typing import Optional, List, Dict
 from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.tools import StructuredTool
+from decimal import Decimal
 
 class BookInfo(BaseModel):
     """Information to filter books"""
@@ -14,6 +15,8 @@ class BookInfo(BaseModel):
     publisher: Optional[str] = None
     category: Optional[str] = None
     year: Optional[int] = None
+    borrowPrice: Optional[Decimal] = None
+    purchasePrice: Optional[Decimal] = None
 
 def filter_books(
     author: Optional[str] = None,
@@ -23,6 +26,8 @@ def filter_books(
     publisher: Optional[str] = None,
     category: Optional[str] = None,
     year: Optional[int] = None,
+    borrowPrice: Optional[Decimal] = None,
+    purchasePrice: Optional[Decimal] = None
 ) -> List[Dict]:
     params = {
         "author": author,
@@ -31,7 +36,9 @@ def filter_books(
         "isbn": isbn,
         "publisher": publisher,
         "category": category,
-        "year": year
+        "year": year,
+        "borrowPrice": borrowPrice,
+        "purchasePrice": purchasePrice
     }
     params = {k: v for k, v in params.items() if v is not None}
     query = urlencode(params)
