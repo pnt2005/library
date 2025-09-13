@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { Book, ShoppingCart, ReceiptText, ChartNoAxesCombinedIcon } from 'lucide-react';
+import { Book, ShoppingCart, ReceiptText, ChartNoAxesCombinedIcon, User } from 'lucide-react';
 import Chatbot from '../chatbot/ChatBox';
 import { useCartStore } from '@/store/cartStore';
 import { useUser } from '@/contexts/UserContext';
@@ -13,6 +13,7 @@ const links = [
   { href: '/receipts/purchase', label: 'Purchase Receipts', icon: <ReceiptText size={18} />, needAuth: true },
   { href: '/statistics', label: 'Statistics', icon: <ChartNoAxesCombinedIcon size={18} />, needAdmin: true},
   { href: '/cart', label: 'Cart', icon: <ShoppingCart size={18} /> },
+  { href: '/users', label: 'Users', icon: <User size={18} />, needAdmin: true },
 ];
 
 export default function Sidebar() {
