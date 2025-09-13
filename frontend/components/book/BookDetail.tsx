@@ -3,8 +3,27 @@
 import Image from 'next/image'
 import { Book } from '@/types/book'
 import AddToCart from '../cart/AddToCard'
+import Link from 'next/link'
+import { deleteBook } from '@/utils/api/book'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 export default function BookDetail({ book }: { book: Book }) {
+  const router = useRouter(); 
+
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this book?")) return;
+    try {
+      await deleteBook(book.id);
+      toast.success("Book deleted successfully!");
+      router.push("/books");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete book");
+    }
+  };
+
+  
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex flex-col md:flex-row gap-6">
@@ -54,7 +73,21 @@ export default function BookDetail({ book }: { book: Book }) {
             <p className="text-gray-800 mt-2 whitespace-pre-line">{book.description}</p>
           </div>
 
-          <AddToCart bookId={book.id} />
+          <div className="flex gap-3 mt-6">
+            <AddToCart bookId={book.id} />
+            <Link
+              href={`/books/${book.id}/edit`}
+              className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              Edit
+            </Link>
+            <button
+              onClick={handleDelete}
+              className="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
