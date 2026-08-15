@@ -8,7 +8,7 @@ export default function BookCard({ book }: { book: Book }) {
     <Link href={`/books/${book.id}`}>
       <div className="border rounded p-4 shadow hover:shadow-md hover:scale-[1.01] transition cursor-pointer">
         <img
-          src={book.image}
+          src={book.image || undefined}
           alt={book.name}
           className="w-full h-60 object-cover mb-2 rounded"
         />

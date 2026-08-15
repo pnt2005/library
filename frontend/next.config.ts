@@ -14,7 +14,8 @@ const nextConfig: NextConfig = {
       "th.bing.com",
       "m.media-amazon.com" ,
       "m.media-amazon.com",
-      "tse3.mm.bing.net"
+      "tse3.mm.bing.net",
+      "books.google.com"
     ]
   },
 };

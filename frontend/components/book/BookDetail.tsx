@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 
 export default function BookDetail({ book }: { book: Book }) {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this book?")) return;
@@ -23,13 +23,13 @@ export default function BookDetail({ book }: { book: Book }) {
     }
   };
 
-  
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex flex-col md:flex-row gap-6">
         {book.image ? (
           <Image
-            src={book.image}
+            src={book.image || undefined}
             alt={book.name}
             width={300}
             height={400}
