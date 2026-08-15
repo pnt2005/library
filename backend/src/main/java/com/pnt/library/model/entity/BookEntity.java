@@ -23,7 +23,7 @@ public class BookEntity {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "isbn")
@@ -52,4 +52,8 @@ public class BookEntity {
 
     @Column(name = "purchase_price")
     private BigDecimal purchasePrice;
+
+    private String isbn13;
+    private Float averageRating;
+    private Float ratingsCount;
 }
