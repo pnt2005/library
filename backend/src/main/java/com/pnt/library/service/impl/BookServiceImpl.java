@@ -11,6 +11,9 @@ import com.pnt.library.repository.BookRepository;
 import com.pnt.library.repository.BorrowReceiptBookRepository;
 import com.pnt.library.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +29,7 @@ public class BookServiceImpl implements BookService {
     private final BorrowReceiptBookRepository borrowReceiptBookRepository;
 
     @Override
-    public List<BookResponseDTO> getBooks(Map<String, String> params) {
+    public Page<BookResponseDTO> getBooks(Map<String, String> params) {
         Specification<BookEntity> specification = Specification.where(null);
 
         if (params.containsKey("name")) {
@@ -76,14 +79,8 @@ public class BookServiceImpl implements BookService {
                     cb.greaterThanOrEqualTo(root.get("quantity"), quantity));
         }
 
-        List<BookEntity> bookEntities = bookRepository.findAll(specification);
-
-        List<BookResponseDTO> bookResponseDTOS = new ArrayList<>();
-        for (BookEntity bookEntity : bookEntities) {
-            BookResponseDTO bookResponseDTO = bookConverter.toBookDTO(bookEntity);
-            bookResponseDTOS.add(bookResponseDTO);
-        }
-        return bookResponseDTOS;
+        Pageable pageable = PageRequest.of(Integer.parseInt(params.getOrDefault("page", "0")), Integer.parseInt(params.getOrDefault("size", "10")));
+        return bookRepository.findAll(specification, pageable).map(bookConverter::toBookDTO);
     }
 
     @Override

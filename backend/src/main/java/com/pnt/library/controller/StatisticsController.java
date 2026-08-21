@@ -27,7 +27,7 @@ public class StatisticsController {
         Map<String, Object> stats = new HashMap<>();
         Map<String, String> params = new HashMap<>();
 
-        stats.put("totalBooks", bookService.getBooks(params).size());
+        stats.put("totalBooks", bookService.getBooks(params).getTotalElements());
         stats.put("totalUsers", userService.getReaders().size() - 1);
         stats.put("totalBorrowReceipts", borrowReceiptService.getBorrowReceipts(params).size());
         stats.put("totalPurchaseReceipts", purchaseReceiptService.getPurchaseReceipts(params).size());

@@ -5,11 +5,11 @@ import com.pnt.library.model.dto.book.BookResponseDTO;
 import com.pnt.library.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,9 +19,9 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<BookResponseDTO>> getBooks(
+    public ResponseEntity<Page<BookResponseDTO>> getBooks(
             @RequestParam Map<String, String> params) {
-        List<BookResponseDTO> books = bookService.getBooks(params);
+        Page<BookResponseDTO> books = bookService.getBooks(params);
         if (books.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
