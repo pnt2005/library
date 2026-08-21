@@ -22,4 +22,7 @@ public class BookResponseDTO {
     private BigDecimal borrowPrice;
     private BigDecimal purchasePrice;
     private List<Long> borrowReceiptBookIds;
+    private String isbn13;
+    private Float averageRating;
+    private Float ratingsCount;
 }

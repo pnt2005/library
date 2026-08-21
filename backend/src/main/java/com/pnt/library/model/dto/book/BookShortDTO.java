@@ -18,4 +18,7 @@ public class BookShortDTO {
     private Long quantity;
     private BigDecimal borrowPrice;
     private BigDecimal purchasePrice;
+    private String isbn13;
+    private Float averageRating;
+    private Float ratingsCount;
 }

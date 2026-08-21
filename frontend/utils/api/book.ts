@@ -1,8 +1,11 @@
 import { api } from './api';
 
 
-export async function getBooks(query = '') {
-  const res = await api.get('/books');
+export async function getBooks(query = '', page = 0, size = 12) {
+  const params = new URLSearchParams(query);
+  params.set('page', page.toString());
+  params.set('size', size.toString());
+  const res = await api.get(`/books?${params.toString()}`);
   return res.data;
 }
 

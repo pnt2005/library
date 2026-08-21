@@ -11,4 +11,6 @@ export type Book = {
   image: string;
   category: string;
   publisher: string;
+  averageRating?: number;
+  ratingsCount?: number;
 };
