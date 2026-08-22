@@ -30,6 +30,6 @@ public class ReaderEntity extends UserEntity {
     @OneToMany(mappedBy = "readerEntity", cascade = CascadeType.ALL)
     private List<PurchaseReceiptEntity> purchaseReceiptEntities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "notificationEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "readerEntity", cascade = CascadeType.ALL)
     private List<NotificationEntity> notificationEntities = new ArrayList<>();
 }

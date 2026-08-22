@@ -14,6 +14,7 @@ import com.pnt.library.repository.BookRepository;
 import com.pnt.library.repository.PurchaseReceiptBookRepository;
 import com.pnt.library.repository.PurchaseReceiptRepository;
 import com.pnt.library.repository.ReaderRepository;
+import com.pnt.library.service.NotificationService;
 import com.pnt.library.service.PurchaseReceiptService;
 import jakarta.persistence.criteria.Join;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
     private final ReaderRepository readerRepository;
     private final PurchaseReceiptBookRepository purchaseReceiptBookRepository;
     private final BookRepository bookRepository;
+    private final NotificationService notificationService;
 
     @Override
     public List<PurchaseReceiptResponseDTO> getPurchaseReceipts(Map<String, String> params) {
@@ -128,7 +130,8 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
 
         //set total price
         purchaseReceiptEntity.setTotalPrice(totalPrice);
-
+        //notification
+        notificationService.createAndSend(readerEntity, "You have a new purchase receipt");
         return purchaseReceiptConverter.toPurchaseReceiptDTO(
                 purchaseReceiptRepository.save(purchaseReceiptEntity)
         );
@@ -151,6 +154,8 @@ public class PurchaseReceiptServiceImpl implements PurchaseReceiptService {
     public PurchaseReceiptResponseDTO updateStatus(Long id, PurchaseReceiptStatus status) {
         PurchaseReceiptEntity entity = findPurchaseReceiptById(id);
         entity.setStatus(status);
+        //notification
+        notificationService.createAndSend(entity.getReaderEntity(), "Your purchase receipt had been" + status.toString());
         return purchaseReceiptConverter.toPurchaseReceiptDTO(
                 purchaseReceiptRepository.save(entity));
     }

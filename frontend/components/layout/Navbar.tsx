@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
 import { useUser } from '@/contexts/UserContext'
 import toast from 'react-hot-toast'
+import NotificationDropdown from '@/components/common/NotificationDropdown'
 
 export default function Navbar() {
   const router = useRouter()
@@ -38,6 +39,7 @@ export default function Navbar() {
                 /> */}
                 <span className="text-sm truncate">{user.username}</span>
               </Link>
+              <NotificationDropdown />
               <button
                 onClick={handleLogout}
                 className="text-sm text-red-500 hover:underline"

@@ -1,6 +1,6 @@
 package com.pnt.library.service;
 
-import com.pnt.library.model.entity.UserEntity;
+import com.pnt.library.model.entity.ReaderEntity;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 public interface NotificationService {
@@ -8,5 +8,5 @@ public interface NotificationService {
 
     SseEmitter subscribe(Long readerId);
 
-    void createAndSend(UserEntity user, String message);
+    void createAndSend(ReaderEntity reader, String message);
 }

@@ -32,6 +32,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(org.springframework.security.config.Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(authenticationEntryPoint)
@@ -70,6 +71,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/purchase-receipts/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/purchase-receipts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/purchase-receipts/**").hasRole("ADMIN")
+
+                        //notifications
+                        .requestMatchers("/notifications/**").authenticated()
 
                         //default
                         .anyRequest().permitAll()

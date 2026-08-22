@@ -2,7 +2,7 @@ package com.pnt.library.service.impl;
 
 import com.pnt.library.exception.ResourceNotFoundException;
 import com.pnt.library.model.entity.NotificationEntity;
-import com.pnt.library.model.entity.UserEntity;
+import com.pnt.library.model.entity.ReaderEntity;
 import com.pnt.library.repository.NotificationRepository;
 import com.pnt.library.service.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +38,13 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void createAndSend(UserEntity user, String message) {
+    public void createAndSend(ReaderEntity reader, String message) {
         NotificationEntity notificationEntity = new NotificationEntity();
-        notificationEntity.setUserEntity(user);
+        notificationEntity.setReaderEntity(reader);
         notificationEntity.setMessage(message);
         notificationEntity.setRead(false);
         notificationRepository.save(notificationEntity);
-        sendNotification(user.getId(), notificationEntity);
+        sendNotification(reader.getId(), notificationEntity);
     }
 
     private void sendNotification(Long readerId, NotificationEntity notificationEntity) {

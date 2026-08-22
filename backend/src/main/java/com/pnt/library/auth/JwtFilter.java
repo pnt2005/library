@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
     @Override
     protected void doFilterInternal(
@@ -31,29 +34,35 @@ public class JwtFilter extends OncePerRequestFilter {
 
         //check header
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            //get jwt and username
-            String jwt = authHeader.substring(7); //remove "Bearer "
-            String username = jwtService.extractUsernameFromAccessToken(jwt);
+            try {
+                //get jwt and username
+                String jwt = authHeader.substring(7); //remove "Bearer "
+                String username = jwtService.extractUsernameFromAccessToken(jwt);
 
-            //check username and user is not auth in SecurityContext
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                //check username and user is not auth in SecurityContext
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                //get user from db
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                    //get user from db
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                //check jwt
-                if (jwtService.isTokenValid(jwt, userDetails)) {
+                    //check jwt
+                    if (jwtService.isTokenValid(jwt, userDetails)) {
 
-                    //create authentication from userDetails
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                            userDetails,
-                            null,
-                            userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        //create authentication from userDetails
+                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities());
+                        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                    //set authentication to SecurityContext
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                        //set authentication to SecurityContext
+                        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    }
                 }
+            } catch (Exception e) {
+                // Token expired hoặc invalid → không set authentication
+                // Spring Security sẽ trả 401 cho các endpoint yêu cầu authenticated()
+                logger.warn("JWT authentication failed: {}", e.getMessage());
             }
         }
         //call the next filter

@@ -15,6 +15,7 @@ import com.pnt.library.repository.BorrowReceiptBookRepository;
 import com.pnt.library.repository.BorrowReceiptRepository;
 import com.pnt.library.repository.ReaderRepository;
 import com.pnt.library.service.BorrowReceiptService;
+import com.pnt.library.service.NotificationService;
 import jakarta.persistence.criteria.Join;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -38,6 +39,7 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
     private final ReaderRepository readerRepository;
     private final BorrowReceiptBookRepository borrowReceiptBookRepository;
     private final BookRepository bookRepository;
+    private final NotificationService notificationService;
 
     @Override
     public List<BorrowReceiptResponseDTO> getBorrowReceipts(Map<String, String> params) {
@@ -139,6 +141,9 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         //set total price
         borrowReceiptEntity.setTotalPrice(totalPrice);
 
+        //notification
+        notificationService.createAndSend(readerEntity, "You had a new borrow receipt");
+
         return borrowReceiptConverter.toBorrowReceiptDTO(
                 borrowReceiptRepository.save(borrowReceiptEntity)
         );
@@ -154,6 +159,8 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         BorrowReceiptEntity entity = findBorrowReceiptById(id);
         entity.setStatus(BorrowReceiptStatus.RETURNED);
         entity.setReturnDate(LocalDateTime.now());
+        //notification
+        notificationService.createAndSend(entity.getReaderEntity(), "Your borrow receipt had been returned");
         return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
     }
 
@@ -162,6 +169,8 @@ public class BorrowReceiptServiceImpl implements BorrowReceiptService {
         BorrowReceiptEntity entity = findBorrowReceiptById(id);
         entity.setStatus(BorrowReceiptStatus.EXTENDING);
         entity.setReturnDate(entity.getReturnDate().plusDays(7));
+        //notification
+        notificationService.createAndSend(entity.getReaderEntity(), "Your borrow receipt had been extended");
         return borrowReceiptConverter.toBorrowReceiptDTO(borrowReceiptRepository.save(entity));
     }
 
